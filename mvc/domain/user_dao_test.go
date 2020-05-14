@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetUserNotUserFound(t *testing.T) {
-	user, err := GetUser(0)
+	user, err := UserDao.GetUser(0)
 
 	// assertではあるべき姿を記述して、そうならない場合のエラーメッセージを第３引数に渡す。(演算子によるけど)
 	assert.Nil(t, user, "we were not expecting a user wih id 0")
@@ -29,7 +29,7 @@ func TestGetUserNotUserFound(t *testing.T) {
 }
 
 func TestGetUserNotError(t *testing.T) {
-	user, err := GetUser(123)
+	user, err := UserDao.GetUser(123)
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 
