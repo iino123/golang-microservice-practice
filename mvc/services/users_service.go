@@ -20,8 +20,7 @@ import (
 // ①
 type usersService struct{}
 
-// type UsersService struct としてもいけそう... --> いけなかった
-// TODO: ↑この理由
+// type UsersService struct としてもいけそう... --> いけなかった --> typeはあくまでも型定義で、typeへの実装はできない(?)
 // ②
 var (
 	UsersService usersService
@@ -31,5 +30,9 @@ var (
 // --> 多分どっちでも良いけど、迷ったらポインタ型でOK(値をコピーしないので)
 // ③
 func (u *usersService) GetUser(userId int64) (*domain.User, *utils.ApplicationError) {
-	return domain.UserDao.GetUser(userId)
+	user, err := domain.UserDao.GetUser(userId)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
