@@ -1,35 +1,30 @@
 package controllers
 
 import (
-	"encoding/json"
+	"github.com/gin-gonic/gin"
 	"github.com/iino123/golang-microservice-practice/mvc/services"
 	"github.com/iino123/golang-microservice-practice/mvc/utils"
 	"net/http"
 	"strconv"
 )
 
-func GetUser(resp http.ResponseWriter, req *http.Request) {
-	userId, err := strconv.ParseInt(req.URL.Query().Get("user_id"), 10, 64)
+func GetUser(c *gin.Context) {
+	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 	if err != nil {
 		apiErr := &utils.ApplicationError{
 			Message:    "user_id must be a number",
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",
 		}
-		jsonValue, _ := json.Marshal(apiErr)
-		resp.WriteHeader(apiErr.StatusCode)
-		resp.Write(jsonValue)
-		return
-	}
-	//services.ItemsService.GetItems(1)
-	user, apiErr2 := services.UsersService.GetUser(userId)
-	if apiErr2 != nil {
-		jsonValue, _ := json.Marshal(apiErr2)
-		resp.WriteHeader(apiErr2.StatusCode)
-		resp.Write(jsonValue)
+		c.JSON(apiErr.StatusCode, apiErr)
 		return
 	}
 
-	jsonValue, _ := json.Marshal(user)
-	resp.Write(jsonValue)
+	user, apiErr := services.UsersService.GetUser(userId)
+	if apiErr != nil {
+		c.JSON(apiErr.StatusCode, apiErr)
+		return
+	}
+
+	c.JSON(http.StatusOK, user)
 }
