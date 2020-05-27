@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
+	"time"
 )
 
 func Post(url string, body interface{}, headers http.Header) (*http.Response, error) {
@@ -17,7 +18,9 @@ func Post(url string, body interface{}, headers http.Header) (*http.Response, er
 	}
 	request.Header = headers
 
-	client := http.Client{}
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
 	return client.Do(request)
 
 }
