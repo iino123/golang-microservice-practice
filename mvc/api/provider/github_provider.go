@@ -3,11 +3,12 @@ package provider
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/iino123/golang-microservice-practice/mvc/api/domain/github"
-	"github.com/iino123/golang-microservice-practice/mvc/api/restclient"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/iino123/golang-microservice-practice/mvc/api/domain/github"
+	"github.com/iino123/golang-microservice-practice/mvc/api/restclient"
 )
 
 const (

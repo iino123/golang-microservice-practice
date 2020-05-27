@@ -2,8 +2,9 @@ package github
 
 import (
 	"encoding/json"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateRepoRequestAsJson(t *testing.T) {
