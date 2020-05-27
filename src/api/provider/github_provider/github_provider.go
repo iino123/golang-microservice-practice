@@ -1,4 +1,4 @@
-package provider
+package github_provider
 
 import (
 	"encoding/json"
@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/iino123/golang-microservice-practice/mvc/api/domain/github"
-	"github.com/iino123/golang-microservice-practice/mvc/api/restclient"
+	"github.com/iino123/golang-microservice-practice/src/api/domain/github"
+	"github.com/iino123/golang-microservice-practice/src/api/restclient"
 )
 
 const (
@@ -25,6 +25,8 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 	headers := http.Header{}
 	headers.Set(headerAuthorization, getAuthorizationHeader(accessToken))
 	response, err := restclient.Post(urlCreateRepo, request, headers)
+	fmt.Println(response)
+	fmt.Println(err)
 	if err != nil {
 		// Q: なぜprintfではだめか?
 		// log.Printf("error when trying create new repo in github: %s", err.Error())
