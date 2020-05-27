@@ -30,6 +30,10 @@ func StartMockups() {
 	enableMocks = true
 }
 
+func FlushMockups() {
+	mocks = make(map[string]*Mock)
+}
+
 func StopMockups() {
 	enableMocks = false
 }

@@ -38,6 +38,7 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 	}
 
 	// Q:なぜわざわざ[]byteに変換するのか？response.Bodyをそのまま扱うのではダメなのか?
+	// --> Unmarshalする際に実質的に型チェックと型付けができるので
 	bytes, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, &github.GithubErrorResponse{
