@@ -59,9 +59,9 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 		}
 
 		/*
-		  githubのapiはstatusがresponseのbodyに含まれない。
-		  --> bytesをUnMarshalしても、errResponseにStatusCodeはセットされていない
-		  --> 下記のようにresponse.StatusCodeをセットする
+			githubのapiはstatusがresponseのbodyに含まれない。
+			--> bytesをUnMarshalしても、errResponseにStatusCodeはセットされていない
+			--> 下記のようにresponse.StatusCodeをセットする
 		*/
 		errResponse.StatusCode = response.StatusCode
 		return nil, &errResponse
